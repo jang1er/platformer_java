@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 // custom imports
 import GameState.GameStateManager;
 
+@SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 
   // dimensions
@@ -77,7 +78,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     double delta = 0;
     int frames = 0;
     long lastTime = System.nanoTime();
-    long renderTime = System.nanoTime();
     long timer = System.currentTimeMillis();
     int ticks = 0;
 
@@ -103,7 +103,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         ticks = 0;
       }
     }
-    stop();
 
   }
 
