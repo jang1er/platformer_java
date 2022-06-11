@@ -12,26 +12,26 @@ import javax.swing.JPanel;
 import GameState.GameStateManager;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener{
-  
+
   // dimensions
   public static final int WIDTH = 320;
   public static final int HEIGHT = 240;
   public static final int SCALE = 2;
-  
+
   // game Thread
   private Thread thread;
   private boolean running;
   private double GameTicks = 60;
-  
-  
-  // image 
+
+
+  // image
   private BufferedImage image;
   private Graphics2D g;
-  
+
   // game state manager
   private GameStateManager gsm;
-  
-  
+
+
   public GamePanel() {
     super();
     // set Window Size
@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     setFocusable(true);
     requestFocus();
   }
-  
+
   public void addNotify() {
     super.addNotify();
     if (thread == null) {
@@ -47,11 +47,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
       addKeyListener(this);
       thread.start();
     }
-    
+
   }
-  
+
   private void init() {
-    
+
     // create image --> Game is drawn on here
     image = new BufferedImage(
         WIDTH, HEIGHT,
@@ -59,19 +59,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         );
     // get graphics component of game image
     g = (Graphics2D) image.getGraphics();
-    
+
     // starts game clock
     running = true;
-    
+
     // adds new GameStateManager
     gsm = new GameStateManager();
   }
-  
+
   @Override
   public void run() {
-    
+
     init();
-    
+
     //game loop setup
     double ns = 1000000000 / GameTicks;
     double delta = 0;
@@ -80,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     long renderTime = System.nanoTime();
     long timer = System.currentTimeMillis();
     int ticks = 0;
-    
+
     // game loop
     while(running) {
       long now = System.nanoTime();
@@ -94,8 +94,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
       if(running)
         render();
       frames++;
-      
-      
+
+
       if(System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
         System.out.println("FPS: " + frames + ", ticks: " + ticks);
@@ -103,28 +103,29 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         ticks = 0;
       }
     }
-    
+    stop();
+
   }
-  
+
   private void update() {
     gsm.update();
   }
-  
+
   private void render() {
     gsm.render(g);
-    
-    
+
+
     // Draw To Screen
     Graphics g2 = getGraphics();
     g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
     g2.dispose();
   }
-  
+
 
   @Override
   public void keyTyped(KeyEvent e) {
     // TODO Auto-generated method stub
-    
+
   }
 
 
@@ -139,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
   public void keyReleased(KeyEvent e) {
     // TODO Auto-generated method stub
     gsm.keyReleased(e.getKeyCode());
-    
+
   }
 
 }
