@@ -11,7 +11,8 @@ public class Game {
       window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       window.setResizable(false);
       window.pack();
-      window.setVisible(true); 
+      window.setVisible(true);
+  //halo Welt  
   }
 
 }
