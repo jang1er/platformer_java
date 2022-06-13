@@ -43,7 +43,11 @@ public class Background {
   
   public void update() {
     x += dx;
+    while(x <= -GamePanel.WIDTH) x += GamePanel.WIDTH;
+    while(x >= GamePanel.WIDTH) x -= GamePanel.WIDTH;
     y += dy;
+    while(y <= -GamePanel.HEIGHT) y += GamePanel.HEIGHT;
+    while(y >= GamePanel.HEIGHT) y -= GamePanel.HEIGHT;
   }
   
   public void draw(Graphics g) {
