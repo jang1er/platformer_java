@@ -84,6 +84,19 @@ public class MenuState extends GameState{
       }
     }
 
+    private void select() {
+    	if(currentOption == 0) {
+    		gsm.setState(GameStateManager.LEVEL1STATE);
+    	}
+    	if(currentOption == 1) {
+    		//help
+    	}
+    	if(currentOption == 2) {
+    		System.exit(0);
+    	}
+    }
+    
+    
     @Override
     public void keyPressed(int k) {
       // TODO Auto-generated method stub
