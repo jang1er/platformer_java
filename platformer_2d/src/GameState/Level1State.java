@@ -2,6 +2,8 @@ package GameState;
 
 import java.awt.*;
 
+import Tilemap.TileMap;
+
 public class Level1State extends GameState {
 
 	private TileMap tileMap;
@@ -16,12 +18,16 @@ public class Level1State extends GameState {
 	}
 	
 	
-	
-	public void init() {}
 	public void update() {}
 	public void draw(Graphics2D g) {}
 	public void keyPressed(int k ) {}
 	public void keyReleased(int k) {}
+
+	@Override
+	public void render(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

@@ -3,16 +3,23 @@ package Main;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.time.Instant;
+import java.time.Duration;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 // custom imports
 import GameState.GameStateManager;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements Runnable, KeyListener{
+public class GamePanel extends JPanel implements KeyListener{
 
   // dimensions
   public static final int WIDTH = 320;
@@ -20,35 +27,58 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
   public static final int SCALE = 2;
 
   // game Thread
-  private Thread thread;
-  private boolean running;
-  private double GameTicks = 60;
-
-
+  private Timer timer;
+  private int ticksPerSecond = 0;
+  private int paintsPerSecond = 0;
+  
   // image
   private BufferedImage image;
-  private Graphics2D g;
+  private Graphics2D g_image;
 
   // game state manager
   private GameStateManager gsm;
 
 
-  public GamePanel() {
+  public GamePanel(JFrame frame) {
     super();
+    
     // set Window Size
     setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
     setFocusable(true);
     requestFocus();
+    
+    init();
+    
+    timer = new Timer(1,new ActionListener() {
+    	 private Instant lastTick;
+         private int ticks = 0;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (lastTick == null) {
+                lastTick = Instant.now();
+            }
+            if (Duration.between(lastTick, Instant.now()).toMillis() >= 1000) {
+                ticksPerSecond = ticks;
+                lastTick = Instant.now();
+                ticks = 0;
+                
+                frame.setTitle("FPS: " + paintsPerSecond + " @" + ticksPerSecond + " ticks");
+            }
+            ticks++;
+            
+            gsm.update();
+            
+            repaint();
+		}
+    	
+    });
   }
 
   public void addNotify() {
     super.addNotify();
-    if (thread == null) {
-      thread = new Thread(this);
-      addKeyListener(this);
-      thread.start();
-    }
-
+    addKeyListener(this);
+    timer.start();
   }
 
   private void init() {
@@ -59,16 +89,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         BufferedImage.TYPE_INT_RGB
         );
     // get graphics component of game image
-    g = (Graphics2D) image.getGraphics();
-
-    // starts game clock
-    running = true;
+    g_image = (Graphics2D) image.getGraphics();
 
     // adds new GameStateManager
     gsm = new GameStateManager();
   }
 
-  @Override
+/* @Override
   public void run() {
 
     init();
@@ -104,20 +131,49 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
       }
     }
 
-  }
+  }*/
+  
 
   private void update() {
     gsm.update();
   }
 
   private void render() {
-    gsm.render(g);
+   // gsm.render(g);
 
 
     // Draw To Screen
     Graphics g2 = getGraphics();
     g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
     g2.dispose();
+  }
+  
+  
+  private Instant lastPaint;
+  private int paints = 0;
+
+  @Override
+  protected void paintComponent(Graphics g) {
+	  
+	  super.paintComponent(g);
+      if (lastPaint == null) {
+          lastPaint = Instant.now();
+      }
+      if (Duration.between(lastPaint, Instant.now()).toMillis() >= 1000) {
+          paintsPerSecond = paints;
+          lastPaint = Instant.now();
+          paints = 0;
+          
+      }
+      paints++;
+	  
+	  // gsm renders game on image
+	  gsm.render(g_image);
+	  
+	  // create graphic surface for jpanel
+	  Graphics2D g2 = (Graphics2D) g.create();
+	  g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
+	  g2.dispose();
   }
 
 
