@@ -86,7 +86,7 @@ public class MenuState extends GameState{
 
     private void select() {
     	if(currentOption == 0) {
-    		gsm.setState(GameStateManager.LEVEL1STATE);
+    		gm.setState(GameStateManager.LEVEL1STATE);
     	}
     	if(currentOption == 1) {
     		//help
@@ -101,6 +101,7 @@ public class MenuState extends GameState{
     public void keyPressed(int k) {
       // TODO Auto-generated method stub
       System.out.println(k);
+      if (k == 10) select();
       if (k == 38) currentOption--;
       if (k == 40) currentOption++;
       if(currentOption < 0)currentOption = options.length-1;
