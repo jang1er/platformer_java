@@ -15,9 +15,7 @@ public class Level1State extends GameState {
 	public void init() {
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/Tilesets/grasstileset.gif");
-		System.out.println("loaded tileset");
-		tileMap.loadMap("/Maps/level1-1.map");
-		System.out.println("loaded map level 1");
+		tileMap.loadMap("/Mpas/level1-1.map");
 		tileMap.setPosition(0, 0);
 		
 	}
@@ -39,12 +37,7 @@ public class Level1State extends GameState {
 
 	@Override
 	public void render(Graphics2D g) {
-		//clear screen
-				g.setColor(Color.WHITE);
-				g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
-				
-				//draw tilemap
-				tileMap.draw(g);
+		// TODO Auto-generated method stub
 		
 	}
 	
