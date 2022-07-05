@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import Main.GamePanel;
-import Tilemap.Background;
+import TileMap.Background;
 
 public class MenuState extends GameState{
   

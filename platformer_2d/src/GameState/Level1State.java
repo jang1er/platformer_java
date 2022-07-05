@@ -1,8 +1,8 @@
 package GameState;
 
 import java.awt.*;
-import Main.GamePanel;
-import Tilemap.*;
+
+import TileMap.*;
 
 public class Level1State extends GameState {
 
@@ -36,7 +36,7 @@ public class Level1State extends GameState {
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);*/
 		
 		//draw bg
-		bg.draw(g);;
+		bg.draw(g);
 		
 		//draw tilemap
 		tileMap.draw(g); 
