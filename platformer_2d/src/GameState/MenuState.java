@@ -11,7 +11,7 @@ public class MenuState extends GameState{
   
   
     private Background bg;
-    private GameStateManager gm;
+    private GameStateManager gsm;
     
     private int currentOption = 0;
     private String[] options = {
@@ -25,30 +25,28 @@ public class MenuState extends GameState{
     private Font titleFont;
     private Font font;
 
-    public MenuState(GameStateManager gm) {
+    public MenuState(GameStateManager gsm) {
       
-      this.gm = gm;
-      
-      try {
-        bg = new Background("/Backgrounds/menubg.gif", 1);
-      
-        bg.setVector(-0.1, 0);
-      
-        titleColor = new Color(128, 0, 0);
-        titleFont = new Font("Century Gothic", Font.PLAIN, 28);
-        
-        font = new Font("Arial", Font.PLAIN, 12);
-        
-        
-      }catch (Exception e) {
-        e.printStackTrace();
-      }
+      this.gsm = gsm;
     }
 
     @Override
     public void init() {
       // TODO Auto-generated method stub
-
+    	try {
+            bg = new Background("/Backgrounds/menubg.gif", 1);
+          
+            bg.setVector(-0.1, 0);
+          
+            titleColor = new Color(128, 0, 0);
+            titleFont = new Font("Century Gothic", Font.PLAIN, 28);
+            
+            font = new Font("Arial", Font.PLAIN, 12);
+            
+            
+          }catch (Exception e) {
+            e.printStackTrace();
+          }
     }
 
     @Override
@@ -103,6 +101,7 @@ public class MenuState extends GameState{
       System.out.println(k);
       if (k == 38) currentOption--;
       if (k == 40) currentOption++;
+      if (k == 10) select();
       if(currentOption < 0)currentOption = options.length-1;
       if(currentOption >= options.length) currentOption = 0;
     }
@@ -112,4 +111,10 @@ public class MenuState extends GameState{
       // TODO Auto-generated method stub
       
     }
+
+	@Override
+	public void unloadState() {
+		// TODO Auto-generated method stub
+		
+	}
 }

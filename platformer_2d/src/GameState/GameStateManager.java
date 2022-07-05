@@ -16,11 +16,15 @@ public class GameStateManager {
     currentState = MENUSTATE;
     gameStates.add(new MenuState(this));
     gameStates.add(new Level1State(this));
+    
+    // initialise menustate
+    gameStates.get(MENUSTATE).init();
   }
   
   public void setState(int state) {
+    gameStates.get(state).init();
+    System.out.println("updating new state to: " + state);
     currentState = state;
-    gameStates.get(currentState).init();
   }
   
   public void update() {
