@@ -42,7 +42,7 @@ public abstract class MapObject {
 	
 	//animation
 	protected Animation animation;
-	protected int currentAnimation;
+	protected int currentAction;
 	protected int previousAction;
 	protected boolean facingRight;
 	
@@ -150,6 +150,9 @@ public abstract class MapObject {
 				if (topRight || bottomRight) {
 					dx = 0;
 					xtemp = (currCol + 1) * tileSize - cwidth / 2;
+				}
+				else {
+					xtemp += dx;
 				}
 			}
 			
