@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import Main.GamePanel;
 import TileMap.Background;
+import static Manager.InputManager.*;
 
 public class MenuState extends GameState{
   
@@ -53,6 +54,12 @@ public class MenuState extends GameState{
     public void update() {
       // TODO Auto-generated method stub
       bg.update();
+      
+      if (getTypedKeyState(ARROW_UP) || getTypedKeyState(W)) currentOption--;
+      if (getTypedKeyState(ARROW_DOWN) || getTypedKeyState(S)) currentOption++;
+      if (getTypedKeyState(ENTER) || getTypedKeyState(SPACE)) select();
+      if(currentOption < 0)currentOption = options.length-1;
+      if(currentOption >= options.length) currentOption = 0;
     }
 
     @Override
@@ -94,23 +101,6 @@ public class MenuState extends GameState{
     	}
     }
     
-    
-    @Override
-    public void keyPressed(int k) {
-      // TODO Auto-generated method stub
-      System.out.println(k);
-      if (k == 38) currentOption--;
-      if (k == 40) currentOption++;
-      if (k == 10) select();
-      if(currentOption < 0)currentOption = options.length-1;
-      if(currentOption >= options.length) currentOption = 0;
-    }
-
-    @Override
-    public void keyReleased(int k) {
-      // TODO Auto-generated method stub
-      
-    }
 
 	@Override
 	public void unloadState() {

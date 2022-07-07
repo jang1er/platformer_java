@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 // custom imports
 import GameState.GameStateManager;
+import Manager.InputManager;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener{
@@ -98,7 +99,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
       if(System.currentTimeMillis() - timer > 1000) {
         timer += 1000;
-        System.out.println("FPS: " + frames + ", ticks: " + ticks);
+        //System.out.println("FPS: " + frames + ", ticks: " + ticks);
         frames = 0;
         ticks = 0;
       }
@@ -131,14 +132,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
   @Override
   public void keyPressed(KeyEvent e) {
     // TODO Auto-generated method stub
-    gsm.keyPressed(e.getKeyCode());
+    InputManager.Input_Pressed(e.getKeyCode());
   }
 
 
   @Override
   public void keyReleased(KeyEvent e) {
     // TODO Auto-generated method stub
-    gsm.keyReleased(e.getKeyCode());
+    InputManager.Input_Released(e.getKeyCode());
 
   }
 
