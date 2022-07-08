@@ -24,19 +24,23 @@ public final class InputManager{
     private InputManager() {}
 
     public static void Input_Pressed(int k) {
+    	if(k >= MAX_KEY_VALUE)return;
         Keys[k] = true;
     }
 
     public static void Input_Released(int k) {
+    	if(k >= MAX_KEY_VALUE)return;
         Keys[k] = false;
         Keys_Previous[k] = false;
     }
 
     public static boolean getKeyState(int k) {
+    	if(k >= MAX_KEY_VALUE)return false;
         return Keys[k];
     }
 
     public static boolean getTypedKeyState(int k) {
+    	if(k >= MAX_KEY_VALUE)return false;
         boolean ans = Keys[k] && !Keys_Previous[k];
         Keys_Previous[k] = Keys[k];
         return ans;
