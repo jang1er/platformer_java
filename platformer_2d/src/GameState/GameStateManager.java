@@ -22,9 +22,16 @@ public class GameStateManager {
   }
   
   public void setState(int state) {
+	// load resources of new state
     gameStates.get(state).init();
     System.out.println("updating new state to: " + state);
+    
+    // cache previous state / hand over control to new state
+    int oldstate = currentState;
     currentState = state;
+    
+    // unload resources of previous state
+    gameStates.get(oldstate).unloadState();
   }
   
   public void update() {
@@ -33,13 +40,5 @@ public class GameStateManager {
   
   public void render(java.awt.Graphics2D g) {
     gameStates.get(currentState).render(g);
-  }
-  
-  public void keyPressed(int k) {
-    gameStates.get(currentState).keyPressed(k);
-  }
-  
-  public void keyReleased(int k) {
-    gameStates.get(currentState).keyReleased(k);
   }
 }

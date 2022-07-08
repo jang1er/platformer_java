@@ -3,6 +3,7 @@ package GameState;
 import java.awt.*;
 
 import TileMap.*;
+import static Manager.InputManager.*;
 
 public class Level1State extends GameState {
 
@@ -24,10 +25,9 @@ public class Level1State extends GameState {
 	}
 	
 	
-	public void update() {}
-	
-	public void keyPressed(int k ) {}
-	public void keyReleased(int k) {}
+	public void update() {
+		if(getTypedKeyState(ESCAPE))gsm.setState(0); 
+	}
 
 	@Override
 	public void render(Graphics2D g) {
@@ -46,8 +46,8 @@ public class Level1State extends GameState {
 
 	@Override
 	public void unloadState() {
-		// TODO Auto-generated method stub
-		
+		tileMap = null;
+		bg = null;
 	}
 	
 	
