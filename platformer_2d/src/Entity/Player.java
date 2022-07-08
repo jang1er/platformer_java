@@ -80,6 +80,8 @@ public class Player extends MapObject {
 			BufferedImage spritesheet = ImageIO.read(
 						getClass().getResourceAsStream("/Sprites/Player/playersprites.gif")
 						);
+			
+			sprites = new ArrayList<BufferedImage[]>();
 			for(int i = 0; i < 7; i++) {
 				BufferedImage[] bi = 
 						new BufferedImage[numFrames[i]];
@@ -109,6 +111,11 @@ public class Player extends MapObject {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		animation = new Animation();
+		currentAction = IDLE;
+		animation.setFrames(sprites.get(IDLE));
+		animation.setDelay(400);
 
 	}
 	
@@ -155,6 +162,31 @@ public class Player extends MapObject {
 			}
 		}
 		
+		//cannot moving while attacking except in air
+		if(
+		(currentAction == SCRATCHING || currentAction == FIREBALL) &&
+		!(jumping || falling)) {
+			dx = 0;
+		}
+		
+		//jumping
+		if(jumping && !falling) {
+	      dy = jumpStart;
+	      falling = true;
+	    }
+		
+		// falling
+	    if(falling) {
+	      
+	      if(dy > 0 && gliding) dy += fallSpeed * 0.1;
+	      else dy += fallSpeed;
+	      
+	      if(dy > 0) jumping = false;
+	      if(dy < 0 && !jumping) dy += stopJumpSpeed;
+	      
+	      if(dy > maxFallSpeed) dy = maxFallSpeed;
+	      
+	    }
 		
 	}
 	
@@ -163,7 +195,7 @@ public class Player extends MapObject {
 		//update position
 		getNextPosition();
 		checkTileMapCollision();
-		setPostion(xtemp, ytemp);
+		setPosition(xtemp, ytemp);
 		
 		//set animation
 		if(scratching) {

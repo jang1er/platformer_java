@@ -26,19 +26,23 @@ public final class InputManager{
 	 * 
 	 */
 
-    // KeyMap Values (accessible from anywhere else if imported correctly )
-    public static final int W = 87;
-    public static final int A = 65;
-    public static final int S = 83;
-    public static final int D = 68;
+	//KeyMap Values (accessible from anywhere else if imported correctly )
+    public static int W = 87;
+    public static int A = 65;
+    public static int S = 83;
+    public static int D = 68;
+    
+    public static int E = 69;
+    public static int F = 70;
+    public static int R = 82;
 
-    public static final int ESCAPE = 27;
-    public static final int SPACE = 32;
-    public static final int ENTER = 10;
-    public static final int ARROW_UP = 38;
-    public static final int ARROW_DOWN = 40;
-    public static final int ARROW_LEFT = 37;
-    public static final int ARROW_RIGHT = 39;
+    public static int ESCAPE = 27;
+    public static int SPACE = 32;
+    public static int ENTER = 10;
+    public static int ARROW_UP = 38;
+    public static int ARROW_DOWN = 40;
+    public static int ARROW_LEFT = 37;
+    public static int ARROW_RIGHT = 39;
 
     //Maximum Key Value which is tracked and accepted by Manager
     private static final int MAX_KEY_VALUE = 150;

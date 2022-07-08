@@ -172,7 +172,7 @@ public abstract class MapObject {
 	public int getCWidth() {return cwidth; }
 	public int getCHeight() {return cheight; }
 	
-	public void setPostion(double x, double y) {
+	public void setPosition(double x, double y) {
 		this.x = x;
 		this.y = y;
 	}
