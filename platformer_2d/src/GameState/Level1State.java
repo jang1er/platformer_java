@@ -35,21 +35,21 @@ public class Level1State extends GameState {
 	public void update() {
 		if(getTypedKeyState(ESCAPE))gsm.setState(0); 
 		
-		if(getTypedKeyState(ARROW_LEFT)) player.setLeft(true);
-		if(getTypedKeyState(ARROW_RIGHT)) player.setRight(true);
-		if(getTypedKeyState(ARROW_UP)) player.setUp(true);
-		if(getTypedKeyState(ARROW_DOWN)) player.setDown(true);
-		if(getTypedKeyState(W)) player.setJumping(true);
-		if(getTypedKeyState(E)) player.setGliding(true);
-		if(getTypedKeyState(R)) player.setScratching();
-		if(getTypedKeyState(F)) player.setFiring();
+		if(getKeyState(ARROW_LEFT)) player.setLeft(true);
+		if(getKeyState(ARROW_RIGHT)) player.setRight(true);
+		if(getKeyState(ARROW_UP)) player.setUp(true);
+		if(getKeyState(ARROW_DOWN)) player.setDown(true);
+		if(getKeyState(W)) player.setJumping(true);
+		if(getKeyState(E)) player.setGliding(true);
+		if(getKeyState(R)) player.setScratching();
+		if(getKeyState(F)) player.setFiring();
 		
-		if(getTypedKeyState(ARROW_LEFT)) player.setLeft(false);
-		if(getTypedKeyState(ARROW_RIGHT)) player.setRight(false);
-		if(getTypedKeyState(ARROW_UP)) player.setUp(false);
-		if(getTypedKeyState(ARROW_DOWN)) player.setDown(false);
-		if(getTypedKeyState(W)) player.setJumping(false);
-		if(getTypedKeyState(E)) player.setGliding(false);
+		if(!getKeyState(ARROW_LEFT)) player.setLeft(false);
+		if(!getKeyState(ARROW_RIGHT)) player.setRight(false);
+		if(!getKeyState(ARROW_UP)) player.setUp(false);
+		if(!getKeyState(ARROW_DOWN)) player.setDown(false);
+		if(!getKeyState(W)) player.setJumping(false);
+		if(!getKeyState(E)) player.setGliding(false);
 		
 		
 		
